@@ -3,7 +3,7 @@
 ; - Set Windows Explorer view mode
 ; - Windows Explorer location clipboard
 ; - Total Commander location clipboard
-
+; - Type different characters
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -40,17 +40,9 @@ return
 ; Ctrl+2: List
 ; Ctrl+2: Details
 
-~^1::
-SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
-return
-
-~^2::
-SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
-return
-
-~^3::
-SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vd")
-return
+~^1:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
+~^2:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
+~^3:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vd")
 
 SendExplorerKeyboardShortcut(shortcutSequence) {
 	If (WinActive("ahk_class CabinetWClass")) {
@@ -62,8 +54,8 @@ SendExplorerKeyboardShortcut(shortcutSequence) {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Windows Explorer Location Clipboard
-; Total Commander Location Clipboard
+; Windows Explorer location clipboard
+; Total Commander location clipboard
 ; Ctrl+Shift+C: Copy location to clipboard
 ; Ctrl+Shift+V: Paste location from clipboard
 
@@ -85,3 +77,17 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+; Type different dashes
+; Win+-: en dash (–, for ranges)
+; Win+Shift+-: em dash (—, like a colon)
+; Win+,: left single angle quotation mark (‹)
+; Win+.: right single angle quotation mark (›)
+; Win+Shift+,: left double angle quotation mark («)
+; Win+Shift+.: right double angle quotation mark (»)
+
+#-::  Send {U+2013}
+#+-:: Send {U+2014}
+#.::  Send {U+203A}
+#+.:: Send {U+00BB}
+#,::  Send {U+2039}
+#+,:: Send {U+00AB}
