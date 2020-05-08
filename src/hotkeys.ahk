@@ -84,6 +84,7 @@ return
 ; Win+.: right single angle quotation mark (›)
 ; Win+Shift+,: left double angle quotation mark («)
 ; Win+Shift+.: right double angle quotation mark (»)
+; Win+8: multiplication sign (×)
 
 #-::  Send {U+2013}
 #+-:: Send {U+2014}
@@ -91,3 +92,4 @@ return
 #+.:: Send {U+00BB}
 #,::  Send {U+2039}
 #+,:: Send {U+00AB}
+#8::  Send {U+00D7}
