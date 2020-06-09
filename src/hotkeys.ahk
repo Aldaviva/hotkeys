@@ -8,8 +8,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Minimize Windows, including Vivaldi, without disabling the Desktop Window Manager Session Manager
-; Win+PageUp: Minimize active window to taskbar
+; Minimize active window
+; This works with Vivaldi without disabling the Desktop Window Manager Session Manager.
+; Win+PageUp    Minimize active window to taskbar
 
 ; This script provides a hotkey (Win+PageUp) to minimize the active window.
 ; This is better than the built-in Windows shortcut of Win+Down because that also turns on screen edge snapping and other hotkeys which can't even be rebound
@@ -35,10 +36,10 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Windows Explorer view modes
-; Ctrl+1: Large Icons
-; Ctrl+2: List
-; Ctrl+2: Details
+; Windows Explorer view mode
+; Ctrl+1    Large Icons
+; Ctrl+2    List
+; Ctrl+2    Details
 
 ~^1:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
 ~^2:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
@@ -56,8 +57,8 @@ SendExplorerKeyboardShortcut(shortcutSequence) {
 
 ; Windows Explorer location clipboard
 ; Total Commander location clipboard
-; Ctrl+Shift+C: Copy location to clipboard
-; Ctrl+Shift+V: Paste location from clipboard
+; Ctrl+Shift+C  Copy location to clipboard
+; Ctrl+Shift+V  Paste location from clipboard
 
 ~^+c::
 If (WinActive("ahk_class CabinetWClass")) {
@@ -77,19 +78,27 @@ return
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Type different dashes
-; Win+-: en dash (–, for ranges)
-; Win+Shift+-: em dash (—, like a colon)
-; Win+,: left single angle quotation mark (‹)
-; Win+.: right single angle quotation mark (›)
-; Win+Shift+,: left double angle quotation mark («)
-; Win+Shift+.: right double angle quotation mark (»)
-; Win+8: multiplication sign (×)
+; Type different characters
+; Win+-         –   en dash (for ranges)
+; Win+Shift+-   —   em dash (like a colon)
+; Win+,         ‹   left single angle quotation mark
+; Win+.         ›   right single angle quotation mark
+; Win+Shift+,   «   left double angle quotation mark
+; Win+Shift+.   »   right double angle quotation mark
+; Win+8         ×   multiplication sign
+; Win+↑         ↑   up arrow
+; Win+→         →   right arrow
+; Win+↓         ↓   down arrow
+; Win+←         ←   left arrow
 
-#-::  Send {U+2013}
-#+-:: Send {U+2014}
-#.::  Send {U+203A}
-#+.:: Send {U+00BB}
-#,::  Send {U+2039}
-#+,:: Send {U+00AB}
-#8::  Send {U+00D7}
+#-::     Send {U+2013}
+#+-::    Send {U+2014}
+#.::     Send {U+203A}
+#+.::    Send {U+00BB}
+#,::     Send {U+2039}
+#+,::    Send {U+00AB}
+#8::     Send {U+00D7}
+#Up::    Send {U+2191}
+#Right:: Send {U+2192}
+#Down::  Send {U+2193}
+#Left::  Send {U+2190}
