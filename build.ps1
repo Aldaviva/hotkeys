@@ -4,6 +4,8 @@ $project_dir = Split-Path $script:MyInvocation.MyCommand.Path
 $source_dir = "$project_dir\src"
 $output_dir = "$project_dir\bin"
 
+New-Item -Path $output_dir -ItemType Directory -Force > $null
+
 Write-Output "Compiling AutoHotkey script to EXE"
 Start-Process -FilePath "$ahk_install_dir\Compiler\Ahk2Exe.exe" -ArgumentList "/in `"$source_dir\hotkeys.ahk`" /out `"$output_dir\hotkeys.exe`" /icon `"$source_dir\icon.ico`" /bin `"$ahk_install_dir\Compiler\ANSI 32-bit.bin`"" -Wait
 
@@ -12,5 +14,8 @@ Start-Process -FilePath "$reshacker_install_dir\ResourceHacker.exe" -ArgumentLis
 
 Write-Output "Merging resource file into EXE"
 Start-Process -FilePath "$reshacker_install_dir\ResourceHacker.exe" -ArgumentList "-open `"$output_dir\hotkeys.exe`" -save `"$output_dir\hotkeys.exe`" -action addoverwrite -resource `"$output_dir\resources.res`"" -Wait
+
+Write-Output "Merging manifest into EXE"
+Start-Process -FilePath "$reshacker_install_dir\ResourceHacker.exe" -ArgumentList "-open `"$output_dir\hotkeys.exe`" -save `"$output_dir\hotkeys.exe`" -action addoverwrite -resource `"$source_dir\manifest.manifest`" -mask MANIFEST,1," -Wait
 
 Write-Output "Done"
