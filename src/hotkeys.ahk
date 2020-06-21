@@ -132,6 +132,8 @@ return
 ; Win+Alt+PgUp	Resize window to top-right corner of screen
 ; Win+Alt+End	Resize window to bottom-left corner of screen
 ; Win+Alt+PgDn	Resize window to bottom-right corner of screen
+; Win+T			Always on top
+; Win+Alt+T		Show notification icons that were hidden by PS Tray Factory
 
 #Insert::#Numpad0
 #Home::#Numpad8
@@ -147,3 +149,5 @@ return
 #Down::#Numpad2
 #Left::#Numpad4
 #Right::#Numpad6
+$#T::Send #^t
+$#!T::Send {LWin down}{Alt down}{Ctrl down}t{Ctrl up}
