@@ -102,29 +102,31 @@ return
 
 
 ; Type different characters
-; Win+-         –   en dash (for ranges)
-; Win+Shift+-   —   em dash (like a colon)
-; Win+,         ‹   left single angle quotation mark
-; Win+.         ›   right single angle quotation mark
-; Win+Shift+,   «   left double angle quotation mark
-; Win+Shift+.   »   right double angle quotation mark
-; Win+8         ×   multiplication sign
-; Win+Alt+↑     ↑   up arrow
-; Win+Alt+→     →   right arrow
-; Win+Alt+↓     ↓   down arrow
-; Win+Alt+←     ←   left arrow
+; Win+-              –   en dash (for ranges)
+; Win+Shift+-        —   em dash (like a colon)
+; Win+Shift+,        ‹   left single angle quotation mark
+; Win+Shift+.        ›   right single angle quotation mark
+; Win+Ctrl+Shift+,   «   left double angle quotation mark
+; Win+Ctrl+Shift+.   »   right double angle quotation mark
+; Win+8              ×   multiplication sign
+; Win+Alt+↑          ↑   up arrow
+; Win+Alt+→          →   right arrow
+; Win+Alt+↓          ↓   down arrow
+; Win+Alt+←          ←   left arrow
+; Win+Alt+.          …   ellipsis
 
-#-::      Send {U+2013}
-#+-::     Send {U+2014}
-#.::      Send {U+203A}
-#+.::     Send {U+00BB}
-#,::      Send {U+2039}
-#+,::     Send {U+00AB}
-#8::      Send {U+00D7}
+#-::       Send {U+2013}
+#+-::      Send {U+2014}
+#+.::      Send {U+203A}
+#+^.::     Send {U+00BB}
+#+,::      Send {U+2039}
+#+^,::     Send {U+00AB}
+#8::       Send {U+00D7}
 $#!Up::    Send {U+2191}
 $#!Right:: Send {U+2192}
 $#!Down::  Send {U+2193}
 $#!Left::  Send {U+2190}
+#!.::      Send {U+2026}
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
