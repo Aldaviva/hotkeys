@@ -12,6 +12,7 @@
 ; Common statements
 
 #NoTrayIcon
+#MenuMaskKey vkFF
 
 osMajorVersion := StrSplit(A_OSVersion, ".")[1]
 
@@ -108,10 +109,10 @@ return
 ; Win+Shift+,   «   left double angle quotation mark
 ; Win+Shift+.   »   right double angle quotation mark
 ; Win+8         ×   multiplication sign
-; Win+Ctrl+↑    ↑   up arrow
-; Win+Ctrl+→    →   right arrow
-; Win+Ctrl+↓    ↓   down arrow
-; Win+Ctrl+←    ←   left arrow
+; Win+Alt+↑     ↑   up arrow
+; Win+Alt+→     →   right arrow
+; Win+Alt+↓     ↓   down arrow
+; Win+Alt+←     ←   left arrow
 
 #-::      Send {U+2013}
 #+-::     Send {U+2014}
@@ -120,10 +121,10 @@ return
 #,::      Send {U+2039}
 #+,::     Send {U+00AB}
 #8::      Send {U+00D7}
-#^Up::    Send {U+2191}
-#^Right:: Send {U+2192}
-#^Down::  Send {U+2193}
-#^Left::  Send {U+2190}
+$#!Up::    Send {U+2191}
+$#!Right:: Send {U+2192}
+$#!Down::  Send {U+2193}
+$#!Left::  Send {U+2190}
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -131,8 +132,10 @@ return
 
 ; Send hotkeys to WinSplit Revolution that would otherwise be reserved by Windows Explorer.
 ; For this to work, WinSplit Revolution must be configured to use numpad inputs for window positioning.
-; Unfortunately, WinSplit Revolution is unable to override existing hotkeys, such as Win+Home in Windows 10, like AutoHotkey can. Therefore, this script overrides the desired hotkey, then sends a different hotkey that WinSplit Revolution was able to listen for.
-; In order to move elevated processes, both this program and WinSplit Revolution must also run elevated. This script's build script will add the administratorRequired element to the EXE manifest, so it will automatically try to elevate on start. Make sure to manually set WinSplit Revolution to run as administrator in the EXE file properties.
+; Unfortunately, WinSplit Revolution is unable to override existing hotkeys, such as Win+Home in Windows 10, like AutoHotkey can. Therefore, this script overrides the desired 
+; hotkey, then sends a different hotkey that WinSplit Revolution was able to listen for.
+; In order to move elevated processes, both this program and WinSplit Revolution must also run elevated. This script's build script will add the administratorRequired element to 
+; the EXE manifest, so it will automatically try to elevate on start. Make sure to manually set WinSplit Revolution to run as administrator in the EXE file properties.
 ;
 ; This layout uses the keyboard navigation cluster for window placement.
 ; You can also use the Win+arrow keys for halves.
@@ -155,17 +158,19 @@ return
 
 #Insert::#Numpad0
 #Home::#Numpad8
+#Up::#Numpad8
 #Delete::#Numpad4
+$#Left::#Numpad4
+$#^Left::<#^Left ; restore original Win+Ctrl+Left behavior: previous virtual desktop
 #End::#Numpad2
+#Down::#Numpad2
 #PgDn::#Numpad6
+$#Right::#Numpad6
+$#^Right::<#^Right ; restore original Win+Ctrl+Right behavior: next virtual desktop
 #!Insert::Send {LWin down}{Numpad5}
 #!Home::Send {LWin down}{Numpad7}
 #!PgUp::Send {LWin down}{Numpad9}
 #!End::Send {LWin down}{Numpad1}
 #!PgDn::Send {LWin down}{Numpad3}
-#Up::#Numpad8
-#Down::#Numpad2
-#Left::#Numpad4
-#Right::#Numpad6
 $#T::Send #^t
 $#!T::Send {LWin down}{Alt down}{Ctrl down}t{Ctrl up}
