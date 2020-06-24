@@ -8,7 +8,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+; Common statements
+
 #NoTrayIcon
+
+osMajorVersion := StrSplit(A_OSVersion, ".")[1]
+
+isWindowsExplorerActive(){
+	return WinActive("ahk_class CabinetWClass") or WinActive("Open") or WinActive("Save") or WinActive("Browse")
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ; Minimize active window
 ; This works with Vivaldi without disabling the Desktop Window Manager Session Manager.
@@ -24,18 +37,17 @@
 ;
 ; Only used in Windows 7 and earlier, since Windows 8 and later don't have this problem with their desktop composition.
 
-osMajorVersion := StrSplit(A_OSVersion, ".")
-If (osMajorVersion[1] <= 7) {
-	#PgUp::
-		;WinMinimize, A ; doesn't work, causes DWM to stop
+#If osMajorVersion <= 7
+#PgUp::
+	;WinMinimize, A ; doesn't work, causes DWM to stop
 
-		PostMessage, 0x112, 0xF020,,, A
-		; This works. DWM keeps running.
-		; 0x112 = WM_SYSCOMMAND
-		; 0xF020 = SC_MINIMIZE
-		; A = currently active window
-		return
-}
+	PostMessage, 0x112, 0xF020,,, A
+	; This works. DWM keeps running.
+	; 0x112 = WM_SYSCOMMAND
+	; 0xF020 = SC_MINIMIZE
+	; A = currently active window
+	return
+#If
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -45,12 +57,18 @@ If (osMajorVersion[1] <= 7) {
 ; Ctrl+2    List
 ; Ctrl+2    Details
 
-~^1:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
-~^2:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
-~^3:: SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vd")
+#If osMajorVersion > 7
+~^1::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}3{Shift up}")
+~^2::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}5{Shift up}")
+~^3::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}6{Shift up}")
+#If osMajorVersion <= 7
+~^1::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
+~^2::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
+~^3::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vd")
+#If
 
 SendExplorerKeyboardShortcut(shortcutSequence) {
-	If (WinActive("ahk_class CabinetWClass")) {
+	If (isWindowsExplorerActive()) {
 		SendInput, %shortcutSequence%
 	}
 }
@@ -65,13 +83,13 @@ SendExplorerKeyboardShortcut(shortcutSequence) {
 ; Ctrl+Shift+V  Paste location from clipboard
 
 ~^+c::
-If (WinActive("ahk_class CabinetWClass")) {
+If (isWindowsExplorerActive()) {
 	SendInput, {Ctrl up}{Shift up}{Alt down}d{Alt up}{Ctrl down}c{Ctrl up}{Esc}{Tab}{Tab}{Tab}{Tab}
 }
 return
 
 ~^+v::
-If (WinActive("ahk_class CabinetWClass")) {
+If (isWindowsExplorerActive()) {
 	SendInput, {Ctrl up}{Shift up}{Alt down}d{Alt up}{Ctrl down}v{Ctrl up}{Enter}
 } Else If (WinActive("ahk_class TTOTAL_CMD")) {
 	SendInput, {Shift up}{Ctrl down}lv{Ctrl up}{Enter}
