@@ -4,7 +4,7 @@
 ; - Windows Explorer location clipboard
 ; - Total Commander location clipboard
 ; - Type different characters
-; - Listen for reserved hotkeys and redirect them to WinSplit Revolution
+; - Send reserved hotkeys to other applications
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -17,7 +17,7 @@
 osMajorVersion := StrSplit(A_OSVersion, ".")[1]
 
 isWindowsExplorerActive(){
-	return WinActive("ahk_class CabinetWClass") or WinActive("Open") or WinActive("Save") or WinActive("Browse")
+	return WinActive("ahk_class CabinetWClass") or WinActive("ahk_class #32770") or WinActive("Open") or WinActive("Save") or WinActive("Browse")
 }
 
 
@@ -132,47 +132,7 @@ $#!Left::  Send {U+2190}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Send hotkeys to WinSplit Revolution that would otherwise be reserved by Windows Explorer.
-; For this to work, WinSplit Revolution must be configured to use numpad inputs for window positioning.
-; Unfortunately, WinSplit Revolution is unable to override existing hotkeys, such as Win+Home in Windows 10, like AutoHotkey can. Therefore, this script overrides the desired 
-; hotkey, then sends a different hotkey that WinSplit Revolution was able to listen for.
-; In order to move elevated processes, both this program and WinSplit Revolution must also run elevated. This script's build script will add the administratorRequired element to 
-; the EXE manifest, so it will automatically try to elevate on start. Make sure to manually set WinSplit Revolution to run as administrator in the EXE file properties.
-;
-; This layout uses the keyboard navigation cluster for window placement.
-; You can also use the Win+arrow keys for halves.
-;
-; Win+Home		Resize window to top half of screen
-; Win+↑			Resize window to top half of screen
-; Win+Del		Resize window to left half of screen
-; Win+←			Resize window to left half of screen
-; Win+PgDn		Resize window to right half of screen
-; Win+→			Resize window to right half of screen
-; Win+End		Resize window to bottom half of screen
-; Win+↓			Resize window to bottom half of screen
-; Win+Ins		Maximize window
-; Win+Alt+Home	Resize window to top-left corner of screen
-; Win+Alt+PgUp	Resize window to top-right corner of screen
-; Win+Alt+End	Resize window to bottom-left corner of screen
-; Win+Alt+PgDn	Resize window to bottom-right corner of screen
-; Win+T			Always on top
-; Win+Alt+T		Show notification icons that were hidden by PS Tray Factory
+; Send hotkeys to PS Tray Factory that would otherwise be reserved by Windows Explorer.
+; Win+Alt+T		Show PS Tray Factory menu
 
-#Insert::#Numpad0
-#Home::#Numpad8
-#Up::#Numpad8
-#Delete::#Numpad4
-$#Left::#Numpad4
-$#^Left::<#^Left ; restore original Win+Ctrl+Left behavior: previous virtual desktop
-#End::#Numpad2
-#Down::#Numpad2
-#PgDn::#Numpad6
-$#Right::#Numpad6
-$#^Right::<#^Right ; restore original Win+Ctrl+Right behavior: next virtual desktop
-#!Insert::Send {LWin down}{Numpad5}
-#!Home::Send {LWin down}{Numpad7}
-#!PgUp::Send {LWin down}{Numpad9}
-#!End::Send {LWin down}{Numpad1}
-#!PgDn::Send {LWin down}{Numpad3}
-$#T::Send #^t
 $#!T::Send {LWin down}{Alt down}{Ctrl down}t{Ctrl up}
