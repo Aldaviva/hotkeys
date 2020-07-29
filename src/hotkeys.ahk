@@ -115,8 +115,22 @@ return
 ; Win+Alt+←          ←   left arrow
 ; Win+Alt+.          …   ellipsis
 
-#-::       Send {U+2013}
-#+-::      Send {U+2014}
+$#-::
+	Process, Exist, Magnify.exe
+	if (ErrorLevel = 0) {
+		Send {U+2013}
+	} else {
+		SendInput, {LWin down}-{LWin up}
+	}
+	return
+$#+-::
+	Process, Exist, Magnify.exe
+	if (ErrorLevel = 0) {
+		Send {U+2014}
+	} else {
+		SendInput, {LWin down}{Shift down}-{Shift up}{LWin up}
+	}
+	return
 #+.::      Send {U+203A}
 #+^.::     Send {U+00BB}
 #+,::      Send {U+2039}
