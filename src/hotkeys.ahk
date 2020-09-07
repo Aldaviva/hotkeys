@@ -54,7 +54,7 @@ isWindowsExplorerActive(){
 
 
 ; Windows Explorer view mode
-; Ctrl+1    Large Icons
+; Ctrl+1    Medium Icons
 ; Ctrl+2    List
 ; Ctrl+2    Details
 
@@ -93,7 +93,7 @@ return
 If (isWindowsExplorerActive()) {
 	SendInput, {Ctrl up}{Shift up}{Alt down}d{Alt up}{Ctrl down}v{Ctrl up}{Enter}
 } Else If (WinActive("ahk_class TTOTAL_CMD")) {
-	SendInput, {Shift up}{Ctrl down}lv{Ctrl up}{Enter}
+	SendInput, {Shift up}{Ctrl down}lv{Ctrl up}{End}{Enter}{Enter}
 }
 return
 
