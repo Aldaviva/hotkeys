@@ -5,6 +5,7 @@
 ; - Total Commander location clipboard
 ; - Type different characters
 ; - Send reserved hotkeys to other applications
+; - Paste plain text in Excel
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -93,7 +94,8 @@ return
 If (isWindowsExplorerActive()) {
 	SendInput, {Ctrl up}{Shift up}{Alt down}d{Alt up}{Ctrl down}v{Ctrl up}{Enter}
 } Else If (WinActive("ahk_class TTOTAL_CMD")) {
-	SendInput, {Shift up}{Ctrl down}lv{Ctrl up}{End}\.{Enter}
+	; "" is an escaped double quotation mark (", U+0022)
+	SendInput, {Shift up}{Ctrl down}l{Ctrl up}""{Ctrl down}v{Ctrl up}{End}""{Enter}
 }
 return
 
