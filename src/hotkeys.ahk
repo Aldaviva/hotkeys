@@ -5,7 +5,6 @@
 ; - Total Commander location clipboard
 ; - Type different characters
 ; - Send reserved hotkeys to other applications
-; - Paste plain text in Excel
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -110,6 +109,8 @@ return
 ; Win+Shift+.        ›   right single angle quotation mark
 ; Win+Ctrl+Shift+,   «   left double angle quotation mark
 ; Win+Ctrl+Shift+.   »   right double angle quotation mark
+; Win+Ctrl+Alt+,     ≤   less than or equal to
+; Win+Ctrl+Alt+.     ≥   greater than or equal to
 ; Win+8              ×   multiplication sign
 ; Win+Alt+↑          ↑   up arrow
 ; Win+Alt+→          →   right arrow
@@ -137,6 +138,8 @@ $#+-::
 #+^.::     Send {U+00BB}
 #+,::      Send {U+2039}
 #+^,::     Send {U+00AB}
+#!^,::     Send {U+2264}
+#!^.::     Send {U+2265}
 #8::       Send {U+00D7}
 $#!Up::    Send {U+2191}
 $#!Right:: Send {U+2192}
