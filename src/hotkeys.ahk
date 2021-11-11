@@ -93,8 +93,21 @@ return
 If (isWindowsExplorerActive()) {
 	SendInput, {Ctrl up}{Shift up}{Alt down}d{Alt up}{Ctrl down}v{Ctrl up}{Enter}
 } Else If (WinActive("ahk_class TTOTAL_CMD")) {
-	; "" is an escaped double quotation mark (", U+0022)
-	SendInput, {Shift up}{Ctrl down}l{Ctrl up}""{Ctrl down}v{Ctrl up}{End}""{Enter}
+	; The transient autocompletion dropdown takes an extra Enter keystroke to dismiss, but it only appears sometimes.
+	; When it doesn't appear, the extra Enter erroneously navigates to "..".
+	; To work around this, surround the pasted path with double-quotation-marks, which seems to disable the autocompletion and still let Total Commander actually navigate to the
+	; path successfully.
+	;     example: "d:\Music\New Rock\Interpol"
+	;
+	; The syntax coloring is wrong in SublimeAutoHotkey, the following SendInput argument is actually one string literal definition, containing two single inner 
+	; double-quotation-marks, and the whole thing is delimited by two outer double-quotation marks
+	; package: https://github.com/ahkscript/SublimeAutoHotkey
+	;
+	; The AutoHotkey documentation is wrong: it says to insert an escaped double-quotation-mark with a second double-quotation mark, like ""
+	;     > To include an actual quote character inside a quoted string, specify two consecutive quotes
+	;	  > source: https://www.autohotkey.com/docs/Language.htm#strings
+	; This inserts "" into Total Commander, not "
+	SendInput, "{Shift up}{Ctrl down}l{Ctrl up}"{Ctrl down}v{Ctrl up}{End}{Enter}"
 }
 return
 
