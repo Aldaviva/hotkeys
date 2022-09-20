@@ -107,7 +107,7 @@ If (isWindowsExplorerActive()) {
 	;     > To include an actual quote character inside a quoted string, specify two consecutive quotes
 	;	  > source: https://www.autohotkey.com/docs/Language.htm#strings
 	; This inserts "" into Total Commander, not "
-	SendInput, "{Shift up}{Ctrl down}l{Ctrl up}"{Ctrl down}v{Ctrl up}{End}{Enter}"
+	SendInput, "{Shift up}{Ctrl down}l{Ctrl up}"{Ctrl down}v{Ctrl up}"{Enter}"
 }
 return
 
