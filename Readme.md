@@ -53,6 +53,7 @@ Total Commander has its own copy location command (`cm_CopySrcPathToClip`), so t
 |`Win`+`Ctrl`+`Alt`+`,`  |`≤`|Type less than or equal to|
 |`Win`+`Ctrl`+`Alt`+`.`  |`≥`|Type greater than or equal to|
 |`Win`+`8`               |`×`|Type multiplication sign|
+|`Win`+`0`               |`°`|Type degree sign|
 |`Win`+`Alt`+`↑`         |`↑`|Type up arrow|
 |`Win`+`Alt`+`→`         |`→`|Type right arrow|
 |`Win`+`Alt`+`↓`         |`↓`|Type down arrow|
