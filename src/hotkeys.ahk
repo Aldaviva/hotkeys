@@ -125,6 +125,7 @@ return
 ; Win+Ctrl+Alt+,     ≤   less than or equal to
 ; Win+Ctrl+Alt+.     ≥   greater than or equal to
 ; Win+8              ×   multiplication sign
+; Win+0              ×   degree sign
 ; Win+Alt+↑          ↑   up arrow
 ; Win+Alt+→          →   right arrow
 ; Win+Alt+↓          ↓   down arrow
@@ -154,6 +155,7 @@ $#+-::
 #!^,::     Send {U+2264}
 #!^.::     Send {U+2265}
 #8::       Send {U+00D7}
+#0::       Send {U+00B0}
 $#!Up::    Send {U+2191}
 $#!Right:: Send {U+2192}
 $#!Down::  Send {U+2193}
