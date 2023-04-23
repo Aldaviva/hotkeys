@@ -14,8 +14,6 @@
 #NoTrayIcon
 #MenuMaskKey vkFF
 
-osMajorVersion := StrSplit(A_OSVersion, ".")[1]
-
 isWindowsExplorerActive(){
 	return WinActive("ahk_class CabinetWClass") or WinActive("ahk_class #32770") or WinActive("Open") or WinActive("Save") or WinActive("Browse")
 }
@@ -24,49 +22,16 @@ isWindowsExplorerActive(){
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-; Minimize active window
-; This works with Vivaldi without disabling the Desktop Window Manager Session Manager.
-; Win+PageUp    Minimize active window to taskbar
-
-; This script provides a hotkey (Win+PageUp) to minimize the active window.
-; This is better than the built-in Windows shortcut of Win+Down because that also turns on screen edge snapping and other hotkeys which can't even be rebound
-; This is better than WinSplit Revolution, which uses a different technique to minimize windows that causes Vivaldi to stop DWM
-; This is better than UltraMon, which has a hotkey for maximizing but not minimizing a window
-; sources:
-;   https://www.autohotkey.com/docs/commands/WinMinimize.htm
-;   https://www.autohotkey.com/docs/misc/WinTitle.htm
-;
-; Only used in Windows 7 and earlier, since Windows 8 and later don't have this problem with their desktop composition.
-
-#If osMajorVersion <= 7
-#PgUp::
-	;WinMinimize, A ; doesn't work, causes DWM to stop
-
-	PostMessage, 0x112, 0xF020,,, A
-	; This works. DWM keeps running.
-	; 0x112 = WM_SYSCOMMAND
-	; 0xF020 = SC_MINIMIZE
-	; A = currently active window
-	return
-#If
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ; Windows Explorer view mode
-; Ctrl+1    Medium Icons
-; Ctrl+2    List
-; Ctrl+2    Details
+; Ctrl+1    Extra Large Icons
+; Ctrl+2    Medium Icons
+; Ctrl+3    List
+; Ctrl+4    Details
 
-#If osMajorVersion > 7
-~^1::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}3{Shift up}")
-~^2::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}5{Shift up}")
-~^3::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}6{Shift up}")
-#If osMajorVersion <= 7
-~^1::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vr{Enter}")
-~^2::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vl")
-~^3::SendExplorerKeyboardShortcut("{Ctrl up}{Alt}vd")
-#If
+~^1::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}1{Shift up}")
+~^2::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}3{Shift up}")
+~^3::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}5{Shift up}")
+~^4::SendExplorerKeyboardShortcut("{Ctrl down}{Shift down}6{Shift up}")
 
 SendExplorerKeyboardShortcut(shortcutSequence) {
 	If (isWindowsExplorerActive()) {
