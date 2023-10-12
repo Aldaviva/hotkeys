@@ -90,7 +90,7 @@ return
 ; Win+Ctrl+Alt+,     ≤   less than or equal to
 ; Win+Ctrl+Alt+.     ≥   greater than or equal to
 ; Win+8              ×   multiplication sign
-; Win+0              ×   degree sign
+; Win+0              °   degree sign
 ; Win+Alt+↑          ↑   up arrow
 ; Win+Alt+→          →   right arrow
 ; Win+Alt+↓          ↓   down arrow
